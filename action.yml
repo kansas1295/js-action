@@ -1,18 +1,14 @@
 steps:
   - name: Checkout
     id: checkout
-    uses: actions/checkout@v3
+    uses: actions/checkout@v4
 
-  - name: Test Local Action
-    id: test-action
-    uses: ./
+  - name: Run my Action
+    id: run-action
+    uses: actions/javascript-action@v1 # Commit with the `v1` tag
     with:
       milliseconds: 1000
 
   - name: Print Output
     id: output
-    run: echo "${{ steps.test-action.outputs.time }}"
-
-runs:
-  using: node20
-  main: dist/index.js
+    run: echo "${{ steps.run-action.outputs.time }}"
